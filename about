@@ -1,0 +1,2 @@
+1) Haven't renamed logical register 0. It is always mapped to physical register 0.
+2) Physical register 0 is never set busy.
