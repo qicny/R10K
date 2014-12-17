@@ -37,18 +37,20 @@ def stage(s, ins):
             if(ins in s['committed']): return 'C'
             return '_'
 
-def printPipelineDiagram(matrix, cycle):
+def printPipelineDiagram(matrix, cycle, f):
     ilist = []
     for each in matrix:
         ilist.extend(each['decode'])
     for c in range(cycle):
-        sys.stdout.write(str(c))
-        sys.stdout.write('\t')
+        sys.stdout.write('%2s' % (str(c)))
+        f.write('%2s' % (str(c)))
     print '\n'
+    f.write('\n')
     for i in range(len(ilist)):
         ins = ilist[i]
         for c in range(cycle):
             stages = matrix[c]
-            sys.stdout.write(stage(stages,ins))
-            sys.stdout.write('\t')            
-        print ''
+            sys.stdout.write('%2s' % (stage(stages,ins)))
+            f.write('%2s' % (stage(stages,ins)))
+        print '\n'
+        f.write('\n')

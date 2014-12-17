@@ -28,6 +28,9 @@ class FreeList:
            return -1
        else:
            return self.list.pop()
+
+    def free_phys(self, old_phys):
+        self.list.append(old_phys)
     
     def remove_mapping(self, logical, physical):
         self.map[logical] = -1

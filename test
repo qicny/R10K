@@ -1,0 +1,414 @@
+Fetch unit initialized
+Decode unit initialized
+Issue unit initialized
+**********************************
+Cycle 0: execute stage 4
+Cycle 0: execute stage 3
+Cycle 0: execute stage 2
+Cycle 0: execute stage 1
+Cycle 0: issue stage
+			Integer queue is empty
+			Floating point queue is empty
+			Address queue is empty
+Cycle 0: decode stage
+			Decode buffer:  []
+Cycle 0: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 0: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63]
+Cycle 0: mapping at the end of cycle
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': None, 'fpm_2': None, 'fpm_1': None, 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [], 'ls2': None, 'ls1': None, 'issue': [], 'alu1': None, 'alu2': None}
+[]
+**********************************
+Cycle 1: execute stage 4
+Cycle 1: execute stage 3
+Cycle 1: execute stage 2
+Cycle 1: execute stage 1
+Cycle 1: issue stage
+			Integer queue is empty
+			Floating point queue is empty
+			Address queue is empty
+Cycle 1: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=1 rt=1 rd=63 extra='-1')
+			Floating point queue size:  0
+			Checking instruction for issue:  instruction(type='M' rs=63 rt=63 rd=62 extra='-1')
+			Floating point queue size:  0
+			Checking instruction for issue:  instruction(type='M' rs=62 rt=62 rd=61 extra='-1')
+			Floating point queue size:  0
+			Checking instruction for issue:  instruction(type='M' rs=61 rt=61 rd=60 extra='-1')
+			Floating point queue size:  0
+			Decode buffer:  [instruction(type='M' rs=61 rt=61 rd=60 extra='-1')]
+Cycle 1: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 1: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59]
+Cycle 1: mapping at the end of cycle
+			1 60
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': None, 'fpm_2': None, 'fpm_1': None, 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=1 rt=1 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=62 extra='-1'), instruction(type='M' rs=62 rt=62 rd=61 extra='-1'), instruction(type='M' rs=61 rt=61 rd=60 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [], 'alu1': None, 'alu2': None}
+[]
+**********************************
+Cycle 2: execute stage 4
+Cycle 2: execute stage 3
+Cycle 2: execute stage 2
+Cycle 2: execute stage 1
+Cycle 2: issue stage
+			Issuing A/M instruction(type='M' rs=1 rt=1 rd=63 extra='-1')
+			Issuing A/M instruction(type='M' rs=63 rt=63 rd=62 extra='-1')
+			Issuing A/M instruction(type='M' rs=62 rt=62 rd=61 extra='-1')
+			Issuing A/M instruction(type='M' rs=61 rt=61 rd=60 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 2: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=61 rt=61 rd=60 extra='-1')
+			Floating point queue size:  3
+			Checking instruction for issue:  instruction(type='M' rs=60 rt=60 rd=59 extra='-1')
+			Floating point queue size:  3
+			Checking instruction for issue:  instruction(type='M' rs=59 rt=59 rd=58 extra='-1')
+			Floating point queue size:  3
+			Checking instruction for issue:  instruction(type='M' rs=58 rt=58 rd=57 extra='-1')
+			Floating point queue size:  3
+			Decode buffer:  [instruction(type='M' rs=58 rt=58 rd=57 extra='-1'), instruction(type='M' rs=57 rt=57 rd=56 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=60 rt=60 rd=59 extra='-1'), instruction(type='M' rs=59 rt=59 rd=58 extra='-1'), instruction(type='M' rs=58 rt=58 rd=57 extra='-1'), instruction(type='M' rs=57 rt=57 rd=56 extra='-1')]
+			To issue:  [instruction(type='M' rs=61 rt=61 rd=60 extra='-1'), instruction(type='M' rs=60 rt=60 rd=59 extra='-1'), instruction(type='M' rs=59 rt=59 rd=58 extra='-1'), instruction(type='M' rs=58 rt=58 rd=57 extra='-1')]
+Cycle 2: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 2: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55]
+Cycle 2: mapping at the end of cycle
+			1 56
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': None, 'fpm_2': None, 'fpm_1': None, 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=60 rt=60 rd=59 extra='-1'), instruction(type='M' rs=59 rt=59 rd=58 extra='-1'), instruction(type='M' rs=58 rt=58 rd=57 extra='-1'), instruction(type='M' rs=57 rt=57 rd=56 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=1 rt=1 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=62 extra='-1'), instruction(type='M' rs=62 rt=62 rd=61 extra='-1'), instruction(type='M' rs=61 rt=61 rd=60 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=0 done=0 itype='M' logreg=1 oldphys=1), active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61)]
+**********************************
+Cycle 3: execute stage 4
+Cycle 3: execute stage 3
+Cycle 3: execute stage 2
+Cycle 3: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=1 rt=1 rd=63 extra='-1') rs_ready=0 rs_ready=0 rd_ready=1 mask=0 tag=None)
+Cycle 3: issue stage
+			Issuing A/M instruction(type='M' rs=61 rt=61 rd=60 extra='-1')
+			Issuing A/M instruction(type='M' rs=60 rt=60 rd=59 extra='-1')
+			Issuing A/M instruction(type='M' rs=59 rt=59 rd=58 extra='-1')
+			Issuing A/M instruction(type='M' rs=58 rt=58 rd=57 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 3: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=58 rt=58 rd=57 extra='-1')
+			Floating point queue size:  7
+			Checking instruction for issue:  instruction(type='M' rs=57 rt=57 rd=56 extra='-1')
+			Floating point queue size:  7
+			Checking instruction for issue:  instruction(type='M' rs=56 rt=56 rd=55 extra='-1')
+			Floating point queue size:  7
+			Checking instruction for issue:  instruction(type='M' rs=55 rt=55 rd=54 extra='-1')
+			Floating point queue size:  7
+			Decode buffer:  [instruction(type='M' rs=55 rt=55 rd=54 extra='-1'), instruction(type='M' rs=54 rt=54 rd=53 extra='-1'), instruction(type='M' rs=53 rt=53 rd=52 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=56 rt=56 rd=55 extra='-1'), instruction(type='M' rs=55 rt=55 rd=54 extra='-1'), instruction(type='M' rs=54 rt=54 rd=53 extra='-1'), instruction(type='M' rs=53 rt=53 rd=52 extra='-1')]
+			To issue:  [instruction(type='M' rs=58 rt=58 rd=57 extra='-1'), instruction(type='M' rs=57 rt=57 rd=56 extra='-1'), instruction(type='M' rs=56 rt=56 rd=55 extra='-1'), instruction(type='M' rs=55 rt=55 rd=54 extra='-1')]
+Cycle 3: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 3: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+Cycle 3: mapping at the end of cycle
+			1 52
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': None, 'fpm_2': None, 'fpm_1': queue element(instr=instruction(type='M' rs=1 rt=1 rd=63 extra='-1') rs_ready=0 rs_ready=0 rd_ready=1 mask=0 tag=None), 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=56 rt=56 rd=55 extra='-1'), instruction(type='M' rs=55 rt=55 rd=54 extra='-1'), instruction(type='M' rs=54 rt=54 rd=53 extra='-1'), instruction(type='M' rs=53 rt=53 rd=52 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=61 rt=61 rd=60 extra='-1'), instruction(type='M' rs=60 rt=60 rd=59 extra='-1'), instruction(type='M' rs=59 rt=59 rd=58 extra='-1'), instruction(type='M' rs=58 rt=58 rd=57 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=0 done=0 itype='M' logreg=1 oldphys=1), active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58)]
+**********************************
+Cycle 4: execute stage 4
+Cycle 4: execute stage 3
+Cycle 4: execute stage 2
+			Executing in FPM sum
+Cycle 4: execute stage 1
+Cycle 4: issue stage
+			Issuing A/M instruction(type='M' rs=58 rt=58 rd=57 extra='-1')
+			Issuing A/M instruction(type='M' rs=57 rt=57 rd=56 extra='-1')
+			Issuing A/M instruction(type='M' rs=56 rt=56 rd=55 extra='-1')
+			Issuing A/M instruction(type='M' rs=55 rt=55 rd=54 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 4: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=55 rt=55 rd=54 extra='-1')
+			Floating point queue size:  10
+			Checking instruction for issue:  instruction(type='M' rs=54 rt=54 rd=53 extra='-1')
+			Floating point queue size:  10
+			Checking instruction for issue:  instruction(type='M' rs=53 rt=53 rd=52 extra='-1')
+			Floating point queue size:  10
+			Checking instruction for issue:  instruction(type='M' rs=52 rt=52 rd=51 extra='-1')
+			Floating point queue size:  10
+			Decode buffer:  [instruction(type='M' rs=52 rt=52 rd=51 extra='-1'), instruction(type='M' rs=51 rt=51 rd=50 extra='-1'), instruction(type='M' rs=50 rt=50 rd=49 extra='-1'), instruction(type='M' rs=49 rt=49 rd=48 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=52 rt=52 rd=51 extra='-1'), instruction(type='M' rs=51 rt=51 rd=50 extra='-1'), instruction(type='M' rs=50 rt=50 rd=49 extra='-1'), instruction(type='M' rs=49 rt=49 rd=48 extra='-1')]
+			To issue:  [instruction(type='M' rs=55 rt=55 rd=54 extra='-1'), instruction(type='M' rs=54 rt=54 rd=53 extra='-1'), instruction(type='M' rs=53 rt=53 rd=52 extra='-1'), instruction(type='M' rs=52 rt=52 rd=51 extra='-1')]
+Cycle 4: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 4: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
+Cycle 4: mapping at the end of cycle
+			1 48
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': None, 'fpm_2': queue element(instr=instruction(type='M' rs=1 rt=1 rd=63 extra='-1') rs_ready=0 rs_ready=0 rd_ready=1 mask=0 tag=None), 'fpm_1': None, 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=52 rt=52 rd=51 extra='-1'), instruction(type='M' rs=51 rt=51 rd=50 extra='-1'), instruction(type='M' rs=50 rt=50 rd=49 extra='-1'), instruction(type='M' rs=49 rt=49 rd=48 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=58 rt=58 rd=57 extra='-1'), instruction(type='M' rs=57 rt=57 rd=56 extra='-1'), instruction(type='M' rs=56 rt=56 rd=55 extra='-1'), instruction(type='M' rs=55 rt=55 rd=54 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=0 done=0 itype='M' logreg=1 oldphys=1), active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55)]
+**********************************
+Cycle 5: execute stage 4
+Cycle 5: execute stage 3
+			Executing in FPM pack
+Cycle 5: execute stage 2
+Cycle 5: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=63 rt=63 rd=62 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=1)
+Cycle 5: issue stage
+			Issuing A/M instruction(type='M' rs=55 rt=55 rd=54 extra='-1')
+			Issuing A/M instruction(type='M' rs=54 rt=54 rd=53 extra='-1')
+			Issuing A/M instruction(type='M' rs=53 rt=53 rd=52 extra='-1')
+			Issuing A/M instruction(type='M' rs=52 rt=52 rd=51 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 5: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=52 rt=52 rd=51 extra='-1')
+			Floating point queue size:  14
+			Checking instruction for issue:  instruction(type='M' rs=51 rt=51 rd=50 extra='-1')
+			Floating point queue size:  14
+			Checking instruction for issue:  instruction(type='M' rs=50 rt=50 rd=49 extra='-1')
+			Floating point queue size:  14
+			Decode buffer:  [instruction(type='M' rs=50 rt=50 rd=49 extra='-1'), instruction(type='M' rs=49 rt=49 rd=48 extra='-1'), instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1')]
+			To issue:  [instruction(type='M' rs=52 rt=52 rd=51 extra='-1'), instruction(type='M' rs=51 rt=51 rd=50 extra='-1')]
+Cycle 5: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 5: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43]
+Cycle 5: mapping at the end of cycle
+			1 44
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': queue element(instr=instruction(type='M' rs=1 rt=1 rd=63 extra='-1') rs_ready=0 rs_ready=0 rd_ready=1 mask=0 tag=None), 'fpm_2': None, 'fpm_1': queue element(instr=instruction(type='M' rs=63 rt=63 rd=62 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=1), 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=55 rt=55 rd=54 extra='-1'), instruction(type='M' rs=54 rt=54 rd=53 extra='-1'), instruction(type='M' rs=53 rt=53 rd=52 extra='-1'), instruction(type='M' rs=52 rt=52 rd=51 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=0 done=0 itype='M' logreg=1 oldphys=1), active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52)]
+**********************************
+Cycle 6: execute stage 4
+			Writing FPM result
+Cycle 6: execute stage 3
+Cycle 6: execute stage 2
+			Executing in FPM sum
+Cycle 6: execute stage 1
+Cycle 6: issue stage
+			Issuing A/M instruction(type='M' rs=52 rt=52 rd=51 extra='-1')
+			Issuing A/M instruction(type='M' rs=51 rt=51 rd=50 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 6: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=50 rt=50 rd=49 extra='-1')
+			Floating point queue size:  15
+			Checking instruction for issue:  instruction(type='M' rs=49 rt=49 rd=48 extra='-1')
+			Floating point queue size:  15
+			Decode buffer:  [instruction(type='M' rs=49 rt=49 rd=48 extra='-1'), instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1')]
+			To issue:  [instruction(type='M' rs=50 rt=50 rd=49 extra='-1')]
+Cycle 6: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Committing instruction  instruction(type='M' rs=1 rt=1 rd=63 extra='-1')
+----------------------------------
+Cycle 6: free list at the end of cycle
+			[32, 33, 34, 35, 36, 37, 38, 39, 1]
+Cycle 6: mapping at the end of cycle
+			1 40
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [instruction(type='M' rs=1 rt=1 rd=63 extra='-1')], 'fpm_3': None, 'fpm_2': queue element(instr=instruction(type='M' rs=63 rt=63 rd=62 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=1), 'fpm_1': None, 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=52 rt=52 rd=51 extra='-1'), instruction(type='M' rs=51 rt=51 rd=50 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51)]
+**********************************
+Cycle 7: execute stage 4
+Cycle 7: execute stage 3
+			Executing in FPM pack
+Cycle 7: execute stage 2
+Cycle 7: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=62 rt=62 rd=61 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=2)
+Cycle 7: issue stage
+			Issuing A/M instruction(type='M' rs=50 rt=50 rd=49 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 7: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=49 rt=49 rd=48 extra='-1')
+			Floating point queue size:  16
+			Decode buffer:  [instruction(type='M' rs=49 rt=49 rd=48 extra='-1'), instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1'), instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1')]
+			To issue:  []
+Cycle 7: fetch stage
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+----------------------------------
+Cycle 7: free list at the end of cycle
+			[32, 33, 34, 35, 36]
+Cycle 7: mapping at the end of cycle
+			1 37
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': queue element(instr=instruction(type='M' rs=63 rt=63 rd=62 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=1), 'fpm_2': None, 'fpm_1': queue element(instr=instruction(type='M' rs=62 rt=62 rd=61 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=2), 'fetch': [instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=50 rt=50 rd=49 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=1 done=0 itype='M' logreg=1 oldphys=63), active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51), active list element(tag=18 done=0 itype='M' logreg=1 oldphys=50)]
+**********************************
+Cycle 8: execute stage 4
+			Writing FPM result
+Cycle 8: execute stage 3
+Cycle 8: execute stage 2
+			Executing in FPM sum
+Cycle 8: execute stage 1
+Cycle 8: issue stage
+			Integer queue is empty
+			Address queue is empty
+Cycle 8: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=49 rt=49 rd=48 extra='-1')
+			Floating point queue size:  15
+			Checking instruction for issue:  instruction(type='M' rs=48 rt=48 rd=47 extra='-1')
+			Floating point queue size:  15
+			Decode buffer:  [instruction(type='M' rs=48 rt=48 rd=47 extra='-1'), instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1'), instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1'), instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1')]
+			Decoded instructions:  [instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1')]
+			To issue:  [instruction(type='M' rs=49 rt=49 rd=48 extra='-1')]
+Cycle 8: fetch stage
+			Fetching ins I 00 00 00
+			Fetching ins M 01 01 01
+			Fetching ins M 01 01 01
+			Committing instruction  instruction(type='M' rs=63 rt=63 rd=62 extra='-1')
+----------------------------------
+Cycle 8: free list at the end of cycle
+			[32, 63]
+Cycle 8: mapping at the end of cycle
+			1 33
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [instruction(type='M' rs=63 rt=63 rd=62 extra='-1')], 'fpm_3': None, 'fpm_2': queue element(instr=instruction(type='M' rs=62 rt=62 rd=61 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=2), 'fpm_1': None, 'fetch': [instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=1 extra='-1')], 'decode': [instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [], 'alu1': None, 'alu2': None}
+[active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51), active list element(tag=18 done=0 itype='M' logreg=1 oldphys=50)]
+**********************************
+Cycle 9: execute stage 4
+Cycle 9: execute stage 3
+			Executing in FPM pack
+Cycle 9: execute stage 2
+Cycle 9: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=3)
+Cycle 9: issue stage
+			Issuing A/M instruction(type='M' rs=49 rt=49 rd=48 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 9: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=48 rt=48 rd=47 extra='-1')
+			Floating point queue size:  15
+			Checking instruction for issue:  instruction(type='M' rs=47 rt=47 rd=46 extra='-1')
+			Floating point queue size:  15
+			Decode buffer:  [instruction(type='M' rs=47 rt=47 rd=46 extra='-1'), instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1'), instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1'), instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1'), instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=33 rt=33 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=32 extra='-1')]
+			Decoded instructions:  [instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=33 rt=33 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=32 extra='-1')]
+			To issue:  [instruction(type='M' rs=48 rt=48 rd=47 extra='-1')]
+Cycle 9: fetch stage
+----------------------------------
+Cycle 9: free list at the end of cycle
+			[]
+Cycle 9: mapping at the end of cycle
+			1 32
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': queue element(instr=instruction(type='M' rs=62 rt=62 rd=61 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=2), 'fpm_2': None, 'fpm_1': queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=3), 'fetch': [], 'decode': [instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=33 rt=33 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=32 extra='-1')], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=49 rt=49 rd=48 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=2 done=0 itype='M' logreg=1 oldphys=62), active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51), active list element(tag=18 done=0 itype='M' logreg=1 oldphys=50), active list element(tag=19 done=0 itype='M' logreg=1 oldphys=49)]
+**********************************
+Cycle 10: execute stage 4
+			Writing FPM result
+Cycle 10: execute stage 3
+Cycle 10: execute stage 2
+			Executing in FPM sum
+Cycle 10: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=4)
+Cycle 10: issue stage
+			Issuing A/M instruction(type='M' rs=48 rt=48 rd=47 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 10: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=47 rt=47 rd=46 extra='-1')
+			Floating point queue size:  15
+			Checking instruction for issue:  instruction(type='M' rs=46 rt=46 rd=45 extra='-1')
+			Floating point queue size:  15
+			Decode buffer:  [instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1'), instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1'), instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1'), instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=33 rt=33 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=32 extra='-1')]
+			Decoded instructions:  []
+			To issue:  [instruction(type='M' rs=47 rt=47 rd=46 extra='-1')]
+Cycle 10: fetch stage
+			Committing instruction  instruction(type='M' rs=62 rt=62 rd=61 extra='-1')
+----------------------------------
+Cycle 10: free list at the end of cycle
+			[62]
+Cycle 10: mapping at the end of cycle
+			1 32
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [instruction(type='M' rs=62 rt=62 rd=61 extra='-1')], 'fpm_3': None, 'fpm_2': queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=3), 'fpm_1': queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=4), 'fetch': [], 'decode': [], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=48 rt=48 rd=47 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51), active list element(tag=18 done=0 itype='M' logreg=1 oldphys=50), active list element(tag=19 done=0 itype='M' logreg=1 oldphys=49), active list element(tag=20 done=0 itype='M' logreg=1 oldphys=48)]
+**********************************
+Cycle 11: execute stage 4
+Cycle 11: execute stage 3
+			Executing in FPM pack
+Cycle 11: execute stage 2
+			Executing in FPM sum
+Cycle 11: execute stage 1
+			Executing in FPM multiply:  queue element(instr=instruction(type='M' rs=60 rt=60 rd=59 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=5)
+Cycle 11: issue stage
+			Issuing A/M instruction(type='M' rs=47 rt=47 rd=46 extra='-1')
+			Integer queue is empty
+			Address queue is empty
+Cycle 11: decode stage
+			Checking instruction for issue:  instruction(type='M' rs=46 rt=46 rd=45 extra='-1')
+			Floating point queue size:  16
+			Decode buffer:  [instruction(type='M' rs=46 rt=46 rd=45 extra='-1'), instruction(type='M' rs=45 rt=45 rd=44 extra='-1'), instruction(type='M' rs=44 rt=44 rd=43 extra='-1'), instruction(type='M' rs=43 rt=43 rd=42 extra='-1'), instruction(type='M' rs=42 rt=42 rd=41 extra='-1'), instruction(type='M' rs=41 rt=41 rd=40 extra='-1'), instruction(type='M' rs=40 rt=40 rd=1 extra='-1'), instruction(type='M' rs=1 rt=1 rd=39 extra='-1'), instruction(type='M' rs=39 rt=39 rd=38 extra='-1'), instruction(type='M' rs=38 rt=38 rd=37 extra='-1'), instruction(type='M' rs=37 rt=37 rd=36 extra='-1'), instruction(type='M' rs=36 rt=36 rd=35 extra='-1'), instruction(type='M' rs=35 rt=35 rd=34 extra='-1'), instruction(type='M' rs=34 rt=34 rd=33 extra='-1'), instruction(type='I' rs=0 rt=0 rd=0 extra='-1'), instruction(type='M' rs=33 rt=33 rd=63 extra='-1'), instruction(type='M' rs=63 rt=63 rd=32 extra='-1')]
+Cycle 11: fetch stage
+----------------------------------
+Cycle 11: free list at the end of cycle
+			[62]
+Cycle 11: mapping at the end of cycle
+			1 32
+{'fpa_3': None, 'fpa_2': None, 'fpa_1': None, 'committed': [], 'fpm_3': queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=3), 'fpm_2': queue element(instr=instruction(type='M' rs=61 rt=61 rd=60 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=4), 'fpm_1': queue element(instr=instruction(type='M' rs=60 rt=60 rd=59 extra='-1') rs_ready=1 rs_ready=1 rd_ready=1 mask=0 tag=5), 'fetch': [], 'decode': [], 'ls2': None, 'ls1': None, 'issue': [instruction(type='M' rs=47 rt=47 rd=46 extra='-1')], 'alu1': None, 'alu2': None}
+[active list element(tag=3 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=4 done=0 itype='M' logreg=1 oldphys=61), active list element(tag=5 done=0 itype='M' logreg=1 oldphys=60), active list element(tag=6 done=0 itype='M' logreg=1 oldphys=59), active list element(tag=7 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=8 done=0 itype='M' logreg=1 oldphys=58), active list element(tag=9 done=0 itype='M' logreg=1 oldphys=57), active list element(tag=10 done=0 itype='M' logreg=1 oldphys=56), active list element(tag=11 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=12 done=0 itype='M' logreg=1 oldphys=55), active list element(tag=13 done=0 itype='M' logreg=1 oldphys=54), active list element(tag=14 done=0 itype='M' logreg=1 oldphys=53), active list element(tag=15 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=16 done=0 itype='M' logreg=1 oldphys=52), active list element(tag=17 done=0 itype='M' logreg=1 oldphys=51), active list element(tag=18 done=0 itype='M' logreg=1 oldphys=50), active list element(tag=19 done=0 itype='M' logreg=1 oldphys=49), active list element(tag=20 done=0 itype='M' logreg=1 oldphys=48), active list element(tag=21 done=0 itype='M' logreg=1 oldphys=47)]
+**********************************
+Done! Done! Done!
+
+0	1	2	3	4	5	6	7	8	9	10	11	
+
+F	D	I	M1	M2	M3	C	_	_	_	_	_	
+F	D	I	_	_	M1	M2	M3	C	_	_	_	
+F	D	I	_	_	_	_	M1	M2	M3	C	_	
+F	D	I	I	_	_	_	_	_	M1	M2	M3	
+_	F	D	I	_	_	_	_	_	_	_	M1	
+_	F	D	I	_	_	_	_	_	_	_	_	
+_	F	D	I	I	_	_	_	_	_	_	_	
+_	F	D	_	I	_	_	_	_	_	_	_	
+_	_	F	D	I	_	_	_	_	_	_	_	
+_	_	F	D	I	I	_	_	_	_	_	_	
+_	_	F	D	_	I	_	_	_	_	_	_	
+_	_	F	D	_	I	_	_	_	_	_	_	
+_	_	_	F	D	I	I	_	_	_	_	_	
+_	_	_	F	D	_	I	_	_	_	_	_	
+_	_	_	F	D	_	_	I	_	_	_	_	
+_	_	_	F	D	_	_	_	_	I	_	_	
+_	_	_	_	F	D	_	_	_	_	I	_	
+_	_	_	_	F	D	_	_	_	_	_	I	
+_	_	_	_	F	D	_	_	_	_	_	_	
+_	_	_	_	F	D	_	_	_	_	_	_	
+_	_	_	_	_	F	D	_	_	_	_	_	
+_	_	_	_	_	F	D	_	_	_	_	_	
+_	_	_	_	_	F	D	_	_	_	_	_	
+_	_	_	_	_	F	D	_	_	_	_	_	
+_	_	_	_	_	_	F	D	_	_	_	_	
+_	_	_	_	_	_	F	D	_	_	_	_	
+_	_	_	_	_	_	F	D	_	_	_	_	
+_	_	_	_	_	_	F	D	_	_	_	_	
+_	_	_	_	_	_	_	F	D	_	_	_	
+_	_	_	_	_	_	_	F	D	_	_	_	
+_	_	_	_	_	_	_	F	D	_	_	_	
+_	_	_	_	_	_	_	F	D	_	_	_	
+_	_	_	_	_	_	_	_	F	D	_	_	
+_	_	_	_	_	_	_	_	F	D	_	_	
+_	_	_	_	_	_	_	_	F	D	_	_	

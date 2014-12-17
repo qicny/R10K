@@ -4,7 +4,6 @@ from fetch import *
 from decode import *
 from issue import *
 from execunits import *
-from mapping import *
 from registers import *
 from helper import *
 from copy import deepcopy
@@ -19,22 +18,23 @@ all_stages = {'fetch':[], 'decode':[], 'issue':[], 'alu1':None, 'alu2':None,
 class Processor:  
     def __init__(self, name):
         self.BS = []
-        self.active = ActiveList()
+        self.flist = FreeList()
+        self.active = ActiveList(self.flist)
         self.bbit = BusyTable()
         self.aqueue = AddressQueue(self.bbit)
         self.fqueue = FPQueue(self.bbit)
         self.iqueue = IntegerQueue(self.bbit)
         self.map = Map()
-        self.flist = FreeList()
         
         self.funit = Fetch(name)
-        self.dunit = Decode(self.map,self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active)
+        self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active)
         self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.bbit)
         self.alu1 = ALU1(self.bbit, self.active)
         self.alu2 = ALU2(self.bbit, self.active)
         self.fpa = FPA(self.bbit, self.active)
         self.fpm = FPM(self.bbit, self.active)
         self.ls = LS(self.bbit, self.active)
+        self.f = open(name + "_result2",'w')
 
     def printFreeList(self, cycle):
         print("Cycle " + str(cycle) + ": free list at the end of cycle")
@@ -53,7 +53,7 @@ class Processor:
         bypass_ls1, bypass_ls2, ls_write = None, None, None
         val_fpa_stage1, bypass_fpa_stage2, bypass_fpa_stage3, fpa_write = None, None, None, None
         val_fpm_stage1, bypass_fpm_stage2, bypass_fpm_stage3, fpm_write = None, None, None, None
-        to_decode, renamed, old_phys, logical = [], [], [], []
+        to_decode, to_issue, old_phys, logical, decoded = [], [], [], [], []
         to_execute = {'alu1':None, 'alu2':None, 'a':None, 'm':None, 'ls':None}
         cycle = 0
         matrix = []
@@ -94,17 +94,23 @@ class Processor:
 
             #Issue#
             print("Cycle " + str(cycle) + ": issue stage")
-            issued, to_execute = self.iunit.do(renamed, old_phys, logical)
+            issued = self.iunit.do(to_issue, old_phys, logical)
+            to_execute = self.iunit.edge()
             this_cycle['issue'] = issued
 
             #Decode#
             print("Cycle " + str(cycle) + ": decode stage")
-            (renamed, old_phys, logical) = self.dunit.calc(to_decode)
-            this_cycle['decode'] = renamed
-
+            (decoded, to_issue, old_phys, logical) = self.dunit.calc(to_decode)
+            
+            
+            this_cycle['decode'] = decoded
+            if not(decoded==to_issue):
+                print "\t\t\tDecoded instructions: ", decoded
+                print "\t\t\tTo issue: ", to_issue
+            
             #Fetch#
             print("Cycle " + str(cycle) + ": fetch stage")
-            (to_decode, fetch_buffer) = self.funit.do()
+            to_decode = self.funit.do()
             this_cycle['fetch'] = to_decode
 
             #Active list commit
@@ -120,11 +126,12 @@ class Processor:
             print self.active.active_list
             cycle = cycle + 1 
             print(sep)
-            if not (to_decode or renamed or not self.active.isEmpty()):          
+            if not (to_decode or to_issue or not self.active.isEmpty()):          
+            #if not (to_decode or to_issue):
                 print "Done! Done! Done!\n"
                 break      
         
-        printPipelineDiagram(matrix, cycle)
+        printPipelineDiagram(matrix, cycle, self.f)
 
 
 

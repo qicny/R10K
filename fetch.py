@@ -26,7 +26,7 @@ class Fetch:
             else:
                 ins[3]=0
                 fetched_ins.append(Instruction(ins[0], int(ins[3]), int(ins[1]), int(ins[2]), ins[4])) 
-        return (fetched_ins, self.IB)
+        return fetched_ins
 
 
         

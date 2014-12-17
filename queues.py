@@ -39,6 +39,9 @@ class Queue:
         else:
             return 0
 
+    def freeSlots(self):
+        return (self.max_size-len(self.queue))
+
 class IntegerQueue(Queue):
     def Remove(self):
         if(len(self.queue)==0):

@@ -21,13 +21,15 @@ class Issue:
                 print "\t\t\tIssuing ", ins
                 self.iq.Insert(ins, mask, tag, rs, rt, rd)
             elif ins.type in ['A','M']:
-                print "\t\t\tIssuing ", ins
+                print "\t\t\tIssuing A/M", ins
                 self.fq.Insert(ins, mask, tag, rs, rt, rd)
             elif ins.type in ['L','S']:
                 print "\t\t\tIssuing ", ins
                 self.aq.Insert(ins, mask, tag, rs, rt, rd)
             issued.append(ins)
+        return issued
 
+    def edge(self):
         #Select instructions for execution
         to_execute = {}
         i = self.iq.Remove()
@@ -38,7 +40,7 @@ class Issue:
 
         a = self.aq.Remove()
         to_execute['ls'] = a
-        return issued, to_execute
+        return to_execute
 
     def write_half(self):
         a = 1

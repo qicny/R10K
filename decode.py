@@ -15,41 +15,63 @@ class Decode:
         self.iq = iq
         self.bt = bt
         self.active = active
-        self.dbuffer = []
-        self.decoded = []
         self.renamed = []
         self.old_physical = []
+        self.logical = []
         print("Decode unit initialized")
 
-    def rename(self):
-        renamed = []
-        old_physical = []
-        logical = []
-        for ins in self.dbuffer[0:4]:
-            if(self.active.isFull()):
-                break
+    def rename(self, to_decode):
+        decoded, old_physical, logical  = [], [], []
+        for ins in to_decode:
             ins.rs, ins.rt = self.map.get_mapping(ins.rs), self.map.get_mapping(ins.rt)
             log = ins.rd
             if(ins.type not in ['S', 'B'] and log):
                 f = self.free.get_phyreg()
+                if(f==-1):
+                    print "\t\t\tFree list is empty"
+                    break
                 self.bt.set_busy(f)
                 old_phys = self.map.get_mapping(ins.rd)
                 self.map.add_mapping(ins.rd, f)
                 ins.rd = f
             else:
                 old_phys = -1
-            renamed.append(ins)
+            decoded.append(ins)
             old_physical.append(old_phys)
             logical.append(log)
-        num_decoded = len(renamed)
-        self.dbuffer = self.dbuffer[num_decoded:]
+        self.renamed.extend(decoded)
+        self.old_physical.extend(old_physical)
+        self.logical.extend(logical)
+        to_issue, old_physical, logical  = [], [], []
 
-        return (renamed, old_physical, logical)
+        f,e,l = 0,0,0
+        for i in range(min(self.active.freeSlots(),len(self.renamed),4)):
+            ins = self.renamed[i]
+            print "\t\t\tChecking instruction for issue: ", ins
+            print "\t\t\tFloating point queue size: ", len(self.fq.queue)
+            if(ins.type in ['I', 'B']):
+                e = e + 1
+                if((self.iq.freeSlots()-e)<0):
+                    break
+            if(ins.type in ['A', 'M']):
+                f = f + 1
+                if((self.fq.freeSlots()-f)<0):
+                    break
+            if(ins.type in ['L', 'S']):
+                l = l + 1
+                if((self.fq.freeSlots()-l)<0):
+                    break            
+            to_issue.append(ins)
+            old_physical.append(self.old_physical[i])
+            logical.append(self.logical[i])
+        i = len(to_issue)
+        self.renamed, self.old_physical, self.logical = self.renamed[i:], self.old_physical[i:], self.logical[i:]
+        print "\t\t\tDecode buffer: ", self.renamed
+        return (decoded, to_issue, old_physical, logical)
     
     def calc(self, to_decode):
-        self.dbuffer.extend(to_decode)
-        (renamed, old_phys, logical) = self.rename()
-        return (renamed, old_phys, logical)
+        return self.rename(to_decode)
+        
     
                 
             

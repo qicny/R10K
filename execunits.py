@@ -56,7 +56,7 @@ class FPM(Exec):
     
     def multiply(self, inst):
         if inst: 
-            print("\t\t\tExecuting in FPM multiply")
+            print "\t\t\tExecuting in FPM multiply: ", inst
         return inst
 
     def sum(self, inst):
