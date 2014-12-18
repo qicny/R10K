@@ -1,31 +1,33 @@
 class Issue:
-    def __init__(self, alist, aq, fq, iq, busy):
+    def __init__(self, alist, aq, fq, iq, lsq, busy, bs):
         self.alist = alist
         self.aq = aq
         self.fq = fq
         self.iq = iq
+        self.lsq = lsq
         self.busy = busy
+        self.bs = bs
         print("Issue unit initialized")
     
-    def do(self, renamed_ins, old_phys, logical):
+    def do(self, renamed_ins, old_phys, logical, stack):
         #Add decoded instructions to lists
         issued = []
         for i in range(len(renamed_ins)):
             ins = renamed_ins[i]
-            mask = 0 #junk for now
             tag = self.alist.Insert(ins, 0, ins.type, logical[i], old_phys[i])
             rs = self.busy.is_busy(ins.rs)
             rt = self.busy.is_busy(ins.rt)
             rd = self.busy.is_busy(ins.rd)
             if ins.type in ['I', 'B']:
                 print "\t\t\tIssuing ", ins
-                self.iq.Insert(ins, mask, tag, rs, rt, rd)
+                self.iq.Insert(ins, stack[i], tag, rs, rt, rd)
             elif ins.type in ['A','M']:
                 print "\t\t\tIssuing A/M", ins
-                self.fq.Insert(ins, mask, tag, rs, rt, rd)
+                self.fq.Insert(ins, stack[i], tag, rs, rt, rd)
             elif ins.type in ['L','S']:
                 print "\t\t\tIssuing ", ins
-                self.aq.Insert(ins, mask, tag, rs, rt, rd)
+                instr = self.aq.Insert(ins, stack[i], tag, rs, rt, rd)
+                self.lsq.Insert(instr)
             issued.append(ins)
         return issued
 

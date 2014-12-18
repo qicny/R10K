@@ -1,10 +1,12 @@
 1) Haven't renamed logical register 0. It is always mapped to physical register 0.
 2) Physical register 0 is never set busy.
 
-
 To implement-
-- Handle full active list 
-- Handle full queues
-- Handle branches
+- Handle full active list, stall decode
+- Handle full queues (Done)
+- Handle branches/flushing
 - Handle load/store
+
+Questions - 
+Can issue be out-of-order?
 

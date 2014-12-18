@@ -20,10 +20,10 @@ def stage(s, ins):
                 if(s['fpa_1'].instr is ins): return 'A1'
             except: pass
             try:
-                if(s['ls2'].instr is ins): return 'LS2'
+                if(s['ls2'].instr is ins): return 'LS'
             except: pass 
             try:
-                if(s['ls1'].instr is ins): return 'LS1'
+                if(s['ls1'].instr is ins): return 'A'
             except: pass
             try:
                 if(s['alu1'].instr is ins): return 'E'
@@ -42,15 +42,15 @@ def printPipelineDiagram(matrix, cycle, f):
     for each in matrix:
         ilist.extend(each['decode'])
     for c in range(cycle):
-        sys.stdout.write('%2s' % (str(c)))
-        f.write('%2s' % (str(c)))
+        sys.stdout.write("{:<3}".format(str(c)))
+        f.write("{:<3}".format(str(c)))
     print '\n'
     f.write('\n')
     for i in range(len(ilist)):
         ins = ilist[i]
         for c in range(cycle):
             stages = matrix[c]
-            sys.stdout.write('%2s' % (stage(stages,ins)))
-            f.write('%2s' % (stage(stages,ins)))
+            sys.stdout.write("{:<3}".format(stage(stages,ins)))
+            f.write("{:<3}".format(stage(stages,ins)))
         print '\n'
         f.write('\n')

@@ -4,10 +4,19 @@ class Exec:
         self.alist = alist
 
 class ALU1(Exec):
-    def do(self, inst,):
+    def __init__(self, bt, alist, bs):
+        self.bt = bt
+        self.alist = alist
+        self.bs = bs
+
+    def do(self, inst):
         if inst: 
             print("\t\t\tExecuting in ALU1")
-            self.bt.unset_busy(inst.instr.rd)
+            if(inst.instr.type=='I'):
+                self.bt.unset_busy(inst.instr.rd)
+            else:
+                if(int(inst.instr.extra)): #mispredict
+                    self.bs.flushOnMispredict(inst)
         return inst
         
     def write(self, inst):
@@ -77,15 +86,21 @@ class FPM(Exec):
         return inst
         
 class LS(Exec):
+    def __init__(self, bt, alist, lsq):
+        self.bt = bt
+        self.alist = alist
+        self.lsq = lsq
+
     def LS1(self, inst):
         if inst: 
             print("\t\t\tAddress calculation in LS")
+            self.lsq.setADone(inst)
         return inst
 
-    def LS2(self, inst):
-        if inst: 
-            print("\t\t\t" + inst.instr.type + "in LS")
-            if(inst.instr.type=='L'):
+    def LS2(self):
+        inst = self.lsq.Remove() 
+        print "\t\t\tExecuting in LS:", inst
+        if(inst and inst.instr.type=='L'):
                 self.bt.unset_busy(inst.instr.rd)
         return inst
     

@@ -6,6 +6,7 @@ class Fetch:
         self.instructions = self.tfile.readlines()
         self.store = self.instructions[:]
         self.IB = []
+        self.lnum = 0
         print("Fetch unit initialized")
         
     def do(self):
@@ -19,13 +20,17 @@ class Fetch:
                 break
             print ("\t\t\t" + "Fetching ins " + each.strip())
             ins = each.strip().split()
-            if (len(ins)==4):
+            if(len(ins)==4):
                 ins.append('-1')
             if(ins[0] is not 'L'):
-                fetched_ins.append(Instruction(ins[0], int(ins[1]), int(ins[2]), int(ins[3]), ins[4]))
+                if(ins[0]=='B'):
+                    fetched_ins.append(Instruction(ins[0], int(ins[1]), int(ins[2]), int(self.lnum), ins[4]))
+                else:
+                    fetched_ins.append(Instruction(ins[0], int(ins[1]), int(ins[2]), int(ins[3]), ins[4]))
             else:
                 ins[3]=0
                 fetched_ins.append(Instruction(ins[0], int(ins[3]), int(ins[1]), int(ins[2]), ins[4])) 
+            self.lnum = self.lnum + 1
         return fetched_ins
 
 

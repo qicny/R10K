@@ -17,23 +17,24 @@ all_stages = {'fetch':[], 'decode':[], 'issue':[], 'alu1':None, 'alu2':None,
 
 class Processor:  
     def __init__(self, name):
-        self.BS = []
+        self.BS = BranchStack()
         self.flist = FreeList()
         self.active = ActiveList(self.flist)
         self.bbit = BusyTable()
         self.aqueue = AddressQueue(self.bbit)
         self.fqueue = FPQueue(self.bbit)
+        self.lsqueue = LSQueue(self.bbit)
         self.iqueue = IntegerQueue(self.bbit)
         self.map = Map()
         
         self.funit = Fetch(name)
-        self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active)
-        self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.bbit)
-        self.alu1 = ALU1(self.bbit, self.active)
+        self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active, self.BS)
+        self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.lsqueue, self.bbit)
+        self.alu1 = ALU1(self.bbit, self.active, self.BS)
         self.alu2 = ALU2(self.bbit, self.active)
         self.fpa = FPA(self.bbit, self.active)
         self.fpm = FPM(self.bbit, self.active)
-        self.ls = LS(self.bbit, self.active)
+        self.ls = LS(self.bbit, self.active, self.lsqueue)
         self.f = open(name + "_result2",'w')
 
     def printFreeList(self, cycle):
@@ -59,6 +60,8 @@ class Processor:
         matrix = []
         while True:
             this_cycle = {}
+            print "\t\t\tAQueue:", self.aqueue
+            print "\t\t\tLSQueue:", self.lsqueue
 
             #Execute stage 4#
             print("Cycle " + str(cycle) + ": execute stage 4")
@@ -78,7 +81,7 @@ class Processor:
             alu2_write = self.alu2.write(bypass_alu2)
             bypass_fpa_stage2 = self.fpa.add(val_fpa_stage1)
             bypass_fpm_stage2 = self.fpm.sum(val_fpm_stage1)
-            bypass_ls2 = self.ls.LS2(bypass_ls1)
+            bypass_ls2 = self.ls.LS2()
             this_cycle['fpa_2'], this_cycle['fpm_2'], this_cycle['ls2'] = bypass_fpa_stage2, bypass_fpm_stage2, bypass_ls2
 
             #Execute stage 1#
@@ -94,13 +97,13 @@ class Processor:
 
             #Issue#
             print("Cycle " + str(cycle) + ": issue stage")
-            issued = self.iunit.do(to_issue, old_phys, logical)
+            issued = self.iunit.do(to_issue, old_phys, logical, stack)
             to_execute = self.iunit.edge()
             this_cycle['issue'] = issued
 
             #Decode#
             print("Cycle " + str(cycle) + ": decode stage")
-            (decoded, to_issue, old_phys, logical) = self.dunit.calc(to_decode)
+            (decoded, to_issue, old_phys, logical, stack) = self.dunit.calc(to_decode)
             
             
             this_cycle['decode'] = decoded

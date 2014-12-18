@@ -5,9 +5,10 @@
         S / rs / rt 
         B / rs, rt / --
 ''' 
+from copy import deepcopy
 
 class Decode:
-    def __init__(self, map, free, aq, fq, iq, bt, active):
+    def __init__(self, map, free, aq, fq, iq, bt, active, bs):
         self.map = map
         self.free = free
         self.aq = aq
@@ -18,10 +19,12 @@ class Decode:
         self.renamed = []
         self.old_physical = []
         self.logical = []
+        self.stack = []
+        self.bs = bs
         print("Decode unit initialized")
 
     def rename(self, to_decode):
-        decoded, old_physical, logical  = [], [], []
+        decoded, old_physical, logical, stack  = [], [], [], []
         for ins in to_decode:
             ins.rs, ins.rt = self.map.get_mapping(ins.rs), self.map.get_mapping(ins.rt)
             log = ins.rd
@@ -36,13 +39,21 @@ class Decode:
                 ins.rd = f
             else:
                 old_phys = -1
+                if(ins.type=='B'):
+                    if(self.bs.isFull()):
+                        break
+                    else:
+                        self.bs.Insert(ins, deepcopy(self.map), int(ins.rd))
             decoded.append(ins)
             old_physical.append(old_phys)
             logical.append(log)
+            stack.append(copy(self.bs))
+
         self.renamed.extend(decoded)
         self.old_physical.extend(old_physical)
         self.logical.extend(logical)
-        to_issue, old_physical, logical  = [], [], []
+        self.stack.extend(stack)
+        to_issue, old_physical, logical, stack  = [], [], [], []
 
         f,e,l = 0,0,0
         for i in range(min(self.active.freeSlots(),len(self.renamed),4)):
@@ -59,22 +70,18 @@ class Decode:
                     break
             if(ins.type in ['L', 'S']):
                 l = l + 1
-                if((self.fq.freeSlots()-l)<0):
+                if((self.aq.freeSlots()-l)<0):
                     break            
             to_issue.append(ins)
             old_physical.append(self.old_physical[i])
             logical.append(self.logical[i])
+            stack.append(self.stack[i])
         i = len(to_issue)
-        self.renamed, self.old_physical, self.logical = self.renamed[i:], self.old_physical[i:], self.logical[i:]
+        self.renamed, self.old_physical, self.logical, self.stack = self.renamed[i:], self.old_physical[i:], self.logical[i:], self.stack[i:]
         print "\t\t\tDecode buffer: ", self.renamed
-        return (decoded, to_issue, old_physical, logical)
+        return (decoded, to_issue, old_physical, logical, stack)
     
     def calc(self, to_decode):
         return self.rename(to_decode)
-        
-    
-                
-            
-            
-            
-    
+
+

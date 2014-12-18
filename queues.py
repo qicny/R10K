@@ -8,11 +8,11 @@ class QElem:
         self.rd_ready = rd_ready
         self.mask = mask        #0000-1111
         self.tag = tag          #0-31
+        self.mask = mask
 
     def __repr__(self):
         return ('queue element(instr=%s rs_ready=%s rs_ready=%s rd_ready=%s mask=%s tag=%s)' 
             % (repr(self.instr), repr(self.rs_ready), repr(self.rt_ready), repr(self.rd_ready), repr(self.mask), repr(self.tag)))
-
 
 class Queue:
     def __init__(self, bbit):
@@ -31,7 +31,7 @@ class Queue:
         else:
             ins = QElem(instr, mask, tag, rs_ready, rt_ready, rd_ready)
             self.queue.append(ins)
-            return 1
+            return ins
 
     def isFull(self):
         if(len(self.queue)==self.max_size):
@@ -129,5 +129,41 @@ class AddressQueue(Queue):
             if(ls): self.queue.remove(ls)
             return ls        
             
+class LSQueue(Queue): 
+    def __init__(self, bbit):
+        self.queue = [] #load/store queue
+        self.max_size = 18
+        self.bt = bbit  
+
+    def Insert(self, instr):
+        if(len(self.queue)==self.max_size):
+            print ("\t\t\tQueue is full")
+            return 0
+        else:
+            self.queue.append([instr,0]) # The second field acts like the done bit for address calculation
+            return 1
+
+    def Remove(self):
+        if(len(self.queue)==0):
+            print ("\t\t\tAddress queue is empty")
+            return None
+        else:
+            ins = None
+            if(self.queue[0][1]):
+                ins = self.queue[0][0]
+                self.queue.remove(self.queue[0])
+            return ins   
+
+    def setADone(self, ins):
+        for each in self.queue:
+            instruction = each[0]
+            print "\t\t\tInstruction is:", instruction
+            if(ins is instruction):
+                each[1] = 1
+                break
+
+
+
+
     
     
