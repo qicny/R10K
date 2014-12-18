@@ -1,5 +1,71 @@
 import sys
 
+def inmask(ins, mins):
+    if not ins:
+        return 0
+    mask = ins.mask.bstack
+    for each in mask:
+        if(each.ins is mins):
+            return 1
+    return 0
+
+
+def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, map):
+    #Flush active list and queues, free physical registers
+    old = []
+    for each in active.active_list:
+        if(each.ins is mins):
+            break
+        else:
+            old.append(each.ins)
+    ins_before_branch = len(old)
+    to_flush = active.active_list[ins_before_branch+1:]
+    active.active_list = active.active_list[0:ins_before_branch]
+    not_flushed = []
+    for each in to_flush:
+        ins = each.ins
+        if(ins.type in ['L','S']):
+            if not(aq.Delete(ins)):
+                not_flushed.append(ins)
+            else:
+                if(ins.type=='L'):
+                    free.free_phys(ins.rd)
+        elif(ins.type in ['A','M']):
+            if not(fq.Delete(ins)):
+                not_flushed.append(ins)
+            else:
+                free.free_phys(ins.rd)
+        elif(ins.type in ['I','B']):
+            if not(iq.Delete(ins)):
+                not_flushed.append(ins)
+            else:
+                if(ins.type=='I'):
+                    free.free_phys(ins.rd)
+    #Empty decode buffer
+    dunit.renamed = []
+    dunit.old_physical = []
+    dunit.logical = []
+    dunit.stack = []
+            
+    #Update fetch unit
+    lnum = mins.rd
+    funit.lnum = lnum+1
+    funit.instructions = funit.store[funit.lnum:]
+    funit.IB = []
+
+    #mapping
+    before_mins = []
+    print "\t\t\tBranch stack is:", bs.bstack
+    for each in bs.bstack:
+        print each
+        if(each.ins is mins):
+            break
+        else:
+            before_mins.append(each)
+    map = each.old_map
+    bs.bstack = bs.bstack[0:len(before_mins)]
+
+
 def stage(s, ins):
             try:
                 if(s['fpm_3'].instr is ins): return 'M3'

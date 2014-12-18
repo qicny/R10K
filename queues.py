@@ -8,7 +8,6 @@ class QElem:
         self.rd_ready = rd_ready
         self.mask = mask        #0000-1111
         self.tag = tag          #0-31
-        self.mask = mask
 
     def __repr__(self):
         return ('queue element(instr=%s rs_ready=%s rs_ready=%s rd_ready=%s mask=%s tag=%s)' 
@@ -41,6 +40,18 @@ class Queue:
 
     def freeSlots(self):
         return (self.max_size-len(self.queue))
+
+    def Delete(self, instr):
+        if(len(self.queue)==0):return 0
+        for each in self.queue:
+            ins = each.instr
+            if(ins is instr):
+                break
+        if(ins is instr): 
+            self.queue.remove(each)
+            return 1
+        else: 
+            return 0
 
 class IntegerQueue(Queue):
     def Remove(self):

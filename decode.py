@@ -5,7 +5,7 @@
         S / rs / rt 
         B / rs, rt / --
 ''' 
-from copy import deepcopy
+from copy import *
 
 class Decode:
     def __init__(self, map, free, aq, fq, iq, bt, active, bs):

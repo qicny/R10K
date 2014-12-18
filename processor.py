@@ -7,29 +7,30 @@ from execunits import *
 from registers import *
 from helper import *
 from copy import deepcopy
+from branch import *
 
 sep = '**********************************'
 line = '----------------------------------'
 all_stages = {'fetch':[], 'decode':[], 'issue':[], 'alu1':None, 'alu2':None, 
 'alu1_write':None, 'alu2_write':None, 'ls1':None, 'ls2':None, 'ls_write':None, 
 'fpa_1':None, 'fpa_2':None, 'fpa_3':None, 'fpa_write':None, 'fpm_1':None, 
-'fpm_2':None, 'fpm_3':None, 'fpm_write':None}
+'fpm_2':None, 'fpm_3':None, 'fpm_write':None, 'committed':[]}
 
 class Processor:  
     def __init__(self, name):
-        self.BS = BranchStack()
         self.flist = FreeList()
-        self.active = ActiveList(self.flist)
         self.bbit = BusyTable()
         self.aqueue = AddressQueue(self.bbit)
         self.fqueue = FPQueue(self.bbit)
         self.lsqueue = LSQueue(self.bbit)
         self.iqueue = IntegerQueue(self.bbit)
         self.map = Map()
-        
+        self.BS = BranchStack(self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit)
+        self.active = ActiveList(self.flist, self.BS)
+
         self.funit = Fetch(name)
         self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active, self.BS)
-        self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.lsqueue, self.bbit)
+        self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.lsqueue, self.bbit, self.BS)
         self.alu1 = ALU1(self.bbit, self.active, self.BS)
         self.alu2 = ALU2(self.bbit, self.active)
         self.fpa = FPA(self.bbit, self.active)
@@ -54,7 +55,7 @@ class Processor:
         bypass_ls1, bypass_ls2, ls_write = None, None, None
         val_fpa_stage1, bypass_fpa_stage2, bypass_fpa_stage3, fpa_write = None, None, None, None
         val_fpm_stage1, bypass_fpm_stage2, bypass_fpm_stage3, fpm_write = None, None, None, None
-        to_decode, to_issue, old_phys, logical, decoded = [], [], [], [], []
+        to_decode, to_issue, old_phys, logical, decoded, stack = [], [], [], [], [], []
         to_execute = {'alu1':None, 'alu2':None, 'a':None, 'm':None, 'ls':None}
         cycle = 0
         matrix = []
@@ -86,7 +87,7 @@ class Processor:
 
             #Execute stage 1#
             print("Cycle " + str(cycle) + ": execute stage 1")
-            bypass_alu1 = self.alu1.do(to_execute['alu1'])
+            (bypass_alu1, mispredicted_branch) = self.alu1.do(to_execute['alu1'])
             bypass_alu2 = self.alu2.do(to_execute['alu2'])
             val_fpa_stage1 = self.fpa.alignment(to_execute['a'])
             val_fpm_stage1 = self.fpm.multiply(to_execute['m'])
@@ -129,6 +130,31 @@ class Processor:
             print self.active.active_list
             cycle = cycle + 1 
             print(sep)
+
+            if(mispredicted_branch):
+                #one cycle stall simulation
+                cycle = cycle + 1 
+                matrix.append(deepcopy(all_stages))
+                
+                not_flushed = mispredict(mispredicted_branch, self.active, self.iqueue, self.fqueue, self.aqueue, self.flist, self.dunit, self.funit, self.BS, self.map)
+                #check all instructions in pipeline
+                if(inmask(bypass_alu2, mispredicted_branch)): bypass_alu2=None
+                if(inmask(bypass_alu1, mispredicted_branch)): bypass_alu1=None
+                if(inmask(alu1_write, mispredicted_branch)): alu1_write=None
+                if(inmask(alu2_write, mispredicted_branch)): alu2_write=None
+                if(inmask(bypass_ls1, mispredicted_branch)): bypass_ls1=None
+                if(inmask(bypass_ls2, mispredicted_branch)): bypass_ls2=None 
+                if(inmask(ls_write, mispredicted_branch)): ls_write=None
+                if(inmask(val_fpa_stage1, mispredicted_branch)): val_fpa_stage1=None
+                if(inmask(bypass_fpa_stage2, mispredicted_branch)): bypass_fpa_stage2=None
+                if(inmask(bypass_fpa_stage3, mispredicted_branch)): bypass_fpa_stage3=None
+                if(inmask(fpa_write, mispredicted_branch)): fpa_write=None
+                if(inmask(val_fpm_stage1, mispredicted_branch)): val_fpm_stage1=None
+                if(inmask(bypass_fpm_stage2, mispredicted_branch)): bypass_fpm_stage2=None
+                if(inmask(bypass_fpm_stage3, mispredicted_branch)): bypass_fpm_stage3=None
+                if(inmask(fpm_write, mispredicted_branch)): fpm_write=None
+                continue
+
             if not (to_decode or to_issue or not self.active.isEmpty()):          
             #if not (to_decode or to_issue):
                 print "Done! Done! Done!\n"

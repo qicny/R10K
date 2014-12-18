@@ -11,10 +11,11 @@ class ActiveListElem:
             % (repr(self.tag), repr(self.done), repr(self.itype), repr(self.logreg), repr(self.oldphys)))
 
 class ActiveList:
-    def __init__(self, free):
+    def __init__(self, free, bs):
         self.active_list = []
         self.max_size = 32
         self.free = free
+        self.bs = bs
     
     def Insert(self, inst, done, itype, logreg, oldphys):
         if(len(self.active_list)==self.max_size):
@@ -54,8 +55,12 @@ class ActiveList:
             if(not elem.done):
                 break
             else:
-                committed.append(elem.ins)
-                self.free.free_phys(elem.oldphys)
+                if(elem.ins.type=='B'):
+                    self.bs.Remove(elem.ins)
+                    committed.append(elem.ins)
+                else:
+                    committed.append(elem.ins)
+                    self.free.free_phys(elem.oldphys)
                 print "\t\t\tCommitting instruction ", elem.ins
         num_committed = len(committed)
         self.active_list = self.active_list[num_committed:]

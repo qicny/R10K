@@ -10,14 +10,16 @@ class ALU1(Exec):
         self.bs = bs
 
     def do(self, inst):
+        mispredict = None
         if inst: 
             print("\t\t\tExecuting in ALU1")
             if(inst.instr.type=='I'):
                 self.bt.unset_busy(inst.instr.rd)
             else:
                 if(int(inst.instr.extra)): #mispredict
-                    self.bs.flushOnMispredict(inst)
-        return inst
+                    mispredict = inst.instr
+                    #self.bs.flushOnMispredict(inst)
+        return (inst, mispredict)
         
     def write(self, inst):
         if inst: 
