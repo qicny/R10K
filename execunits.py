@@ -19,6 +19,8 @@ class ALU1(Exec):
                 if(int(inst.instr.extra)): #mispredict
                     mispredict = inst.instr
                     #self.bs.flushOnMispredict(inst)
+                else:
+                    self.bs.Remove(inst.instr)
         return (inst, mispredict)
         
     def write(self, inst):

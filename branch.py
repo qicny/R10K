@@ -39,9 +39,13 @@ class BranchStack():
         #    if (each.verified and each.mispredict)
 
     def Remove(self, ins):
-        first = self.bstack[0].ins
-        if(first is ins):
-            self.bstack = self.bstack[1:]
+        print "\t\t\tRemoving ", ins, "from ", self.bstack
+        each = None
+        for each in self.bstack:
+            if(each.ins is ins):
+                break
+        if(each and each.ins is ins): self.bstack.remove(each)
+
 
     def flushOnMispredict(ins):
         #Branch stack

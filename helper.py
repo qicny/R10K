@@ -1,11 +1,13 @@
 import sys
 
 def inmask(ins, mins):
+    print "\t\t\t ins is", ins
     if not ins:
         return 0
-    mask = ins.mask.bstack
+    mask = ins.mask
     for each in mask:
         if(each.ins is mins):
+            print "\t\t\tInstruction came after mispredicted branch", ins
             return 1
     return 0
 
@@ -49,8 +51,16 @@ def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, map):
             
     #Update fetch unit
     lnum = mins.rd
-    funit.lnum = lnum+1
+    funit.lnum = lnum
     funit.instructions = funit.store[funit.lnum:]
+    if(funit.instructions[0][-1]=='1'): 
+        i_to_flip = funit.instructions[0]
+        i_new = i_to_flip[0:-1] + '0'
+        funit.instructions[0]= i_new
+    if(funit.instructions[0][-2]=='1'): 
+        i_to_flip = funit.instructions[0]
+        i_new = i_to_flip[0:-2] + '0' + i_to_flip[-1]
+        funit.instructions[0] = i_new
     funit.IB = []
 
     #mapping
@@ -106,7 +116,11 @@ def stage(s, ins):
 def printPipelineDiagram(matrix, cycle, f):
     ilist = []
     for each in matrix:
-        ilist.extend(each['decode'])
+        ilist.extend(each['fetch'])
+
+    sys.stdout.write("{:<12}".format('instruction'))
+    f.write("{:<12}".format('instruction'))
+
     for c in range(cycle):
         sys.stdout.write("{:<3}".format(str(c)))
         f.write("{:<3}".format(str(c)))
@@ -114,6 +128,8 @@ def printPipelineDiagram(matrix, cycle, f):
     f.write('\n')
     for i in range(len(ilist)):
         ins = ilist[i]
+        sys.stdout.write("{:<12}".format(ins.type))
+        f.write("{:<12}".format(ins.type))
         for c in range(cycle):
             stages = matrix[c]
             sys.stdout.write("{:<3}".format(stage(stages,ins)))

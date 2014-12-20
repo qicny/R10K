@@ -25,6 +25,7 @@ class Decode:
 
     def rename(self, to_decode):
         decoded, old_physical, logical, stack  = [], [], [], []
+        print "\t\t\tBranch stack:", self.bs.bstack
         for ins in to_decode:
             ins.rs, ins.rt = self.map.get_mapping(ins.rs), self.map.get_mapping(ins.rt)
             log = ins.rd
@@ -47,7 +48,7 @@ class Decode:
             decoded.append(ins)
             old_physical.append(old_phys)
             logical.append(log)
-            stack.append(copy(self.bs))
+            stack.append(copy(self.bs.bstack))
 
         self.renamed.extend(decoded)
         self.old_physical.extend(old_physical)

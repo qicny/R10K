@@ -105,7 +105,8 @@ class Processor:
             #Decode#
             print("Cycle " + str(cycle) + ": decode stage")
             (decoded, to_issue, old_phys, logical, stack) = self.dunit.calc(to_decode)
-            
+            print "\t\t\tBranch stack after decode: ", self.BS.bstack
+            print "\t\t\tBranch stack for each ins after decode: ", stack
             
             this_cycle['decode'] = decoded
             if not(decoded==to_issue):
@@ -129,13 +130,12 @@ class Processor:
             matrix.append(this_cycle)
             print self.active.active_list
             cycle = cycle + 1 
-            print(sep)
 
             if(mispredicted_branch):
                 #one cycle stall simulation
                 cycle = cycle + 1 
                 matrix.append(deepcopy(all_stages))
-                
+
                 not_flushed = mispredict(mispredicted_branch, self.active, self.iqueue, self.fqueue, self.aqueue, self.flist, self.dunit, self.funit, self.BS, self.map)
                 #check all instructions in pipeline
                 if(inmask(bypass_alu2, mispredicted_branch)): bypass_alu2=None
@@ -153,13 +153,21 @@ class Processor:
                 if(inmask(bypass_fpm_stage2, mispredicted_branch)): bypass_fpm_stage2=None
                 if(inmask(bypass_fpm_stage3, mispredicted_branch)): bypass_fpm_stage3=None
                 if(inmask(fpm_write, mispredicted_branch)): fpm_write=None
-                continue
-
+                if(inmask(to_execute['alu1'], mispredicted_branch)): to_execute['alu1']=None
+                if(inmask(to_execute['alu2'], mispredicted_branch)): to_execute['alu2']=None
+                if(inmask(to_execute['a'], mispredicted_branch)): to_execute['a']=None
+                if(inmask(to_execute['m'], mispredicted_branch)): to_execute['m']=None
+                if(inmask(to_execute['ls'], mispredicted_branch)): to_execute['l']=None
+                continue;
+            if(cycle==20):
+                break
+            print(sep)
             if not (to_decode or to_issue or not self.active.isEmpty()):          
             #if not (to_decode or to_issue):
                 print "Done! Done! Done!\n"
-                break      
-        
+                break  
+
+        print matrix[1]
         printPipelineDiagram(matrix, cycle, self.f)
 
 

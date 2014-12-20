@@ -18,7 +18,6 @@ class Fetch:
         for each in fetched:
             if(each=='\n'):
                 break
-            print ("\t\t\t" + "Fetching ins " + each.strip())
             ins = each.strip().split()
             if(len(ins)==4):
                 ins.append('-1')
@@ -31,6 +30,7 @@ class Fetch:
                 ins[3]=0
                 fetched_ins.append(Instruction(ins[0], int(ins[3]), int(ins[1]), int(ins[2]), ins[4])) 
             self.lnum = self.lnum + 1
+        print "\t\t\t" + "Fetched ins ", fetched_ins
         return fetched_ins
 
 
