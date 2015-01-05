@@ -17,7 +17,10 @@ class Issue:
             tag = self.alist.Insert(ins, 0, ins.type, logical[i], old_phys[i])
             rs = self.busy.is_busy(ins.rs)
             rt = self.busy.is_busy(ins.rt)
-            rd = self.busy.is_busy(ins.rd)
+            if(ins.type is not 'B'):
+                rd = self.busy.is_busy(ins.rd)
+            else:
+                rd = 1
             if ins.type in ['I', 'B']:
                 print "\t\t\tIssuing ", ins
                 self.iq.Insert(ins, stack[i], tag, rs, rt, rd)

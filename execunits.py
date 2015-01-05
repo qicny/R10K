@@ -105,7 +105,7 @@ class LS(Exec):
         inst = self.lsq.Remove() 
         print "\t\t\tExecuting in LS:", inst
         if(inst and inst.instr.type=='L'):
-                self.bt.unset_busy(inst.instr.rd)
+            self.bt.unset_busy(inst.instr.rd)
         return inst
     
     def write(self, inst):

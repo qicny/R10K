@@ -1,0 +1,7 @@
+instruction 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 
+M           F  D  I  M1 M2 M3 C  _  _  _  _  _  _  _  _  _  
+M           F  D  I  _  _  M1 M2 M3 C  _  _  _  _  _  _  _  
+M           F  D  I  _  _  _  _  M1 M2 M3 C  _  _  _  _  _  
+L           F  D  I  _  _  _  _  _  _  A  LS C  _  _  _  _  
+M           _  F  D  I  _  _  _  _  _  _  _  M1 M2 M3 C  _  
+L           _  F  D  I  _  _  _  _  _  _  _  _  _  A  LS C  

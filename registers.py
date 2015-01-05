@@ -34,6 +34,9 @@ class FreeList:
     
     def remove_mapping(self, logical, physical):
         self.map[logical] = -1
+
+    def freeRegisters(self):
+        return len(self.list)
         
 class BusyTable:
     def __init__(self):

@@ -1,0 +1,9 @@
+To run a trace file - 
+	Run main.py  - python main.py
+	Press enter
+	Write the name of the file with full path
+	e.g python main.py
+		$input
+	This will give the result in a file called $input_result
+My python version is 2.7
+Thank you!

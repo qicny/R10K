@@ -8,7 +8,7 @@
 from copy import *
 
 class Decode:
-    def __init__(self, map, free, aq, fq, iq, bt, active, bs):
+    def __init__(self, map, free, aq, fq, iq, bt, active, bs, fu):
         self.map = map
         self.free = free
         self.aq = aq
@@ -21,11 +21,14 @@ class Decode:
         self.logical = []
         self.stack = []
         self.bs = bs
+        self.fu = fu
         print("Decode unit initialized")
 
     def rename(self, to_decode):
         decoded, old_physical, logical, stack  = [], [], [], []
         print "\t\t\tBranch stack:", self.bs.bstack
+        size = len(to_decode)
+        i = 1
         for ins in to_decode:
             ins.rs, ins.rt = self.map.get_mapping(ins.rs), self.map.get_mapping(ins.rt)
             log = ins.rd
@@ -42,9 +45,12 @@ class Decode:
                 old_phys = -1
                 if(ins.type=='B'):
                     if(self.bs.isFull()):
+                        undo_fetch = size - i
+                        self.fu.instructions = self.fu.store[ins.rd:(ins.rd+undo_fetch+1)] + self.fu.instructions
                         break
                     else:
                         self.bs.Insert(ins, deepcopy(self.map), int(ins.rd))
+            i = i+1
             decoded.append(ins)
             old_physical.append(old_phys)
             logical.append(log)
@@ -57,10 +63,14 @@ class Decode:
         to_issue, old_physical, logical, stack  = [], [], [], []
 
         f,e,l = 0,0,0
+        free_reg = self.free.freeRegisters()
         for i in range(min(self.active.freeSlots(),len(self.renamed),4)):
             ins = self.renamed[i]
+            if(ins.type in ['I', 'A', 'M', 'L']):
+                if(free_reg==0):
+                    break
+                free_reg = free_reg-1
             print "\t\t\tChecking instruction for issue: ", ins
-            print "\t\t\tFloating point queue size: ", len(self.fq.queue)
             if(ins.type in ['I', 'B']):
                 e = e + 1
                 if((self.iq.freeSlots()-e)<0):

@@ -7,12 +7,13 @@ def inmask(ins, mins):
     mask = ins.mask
     for each in mask:
         if(each.ins is mins):
-            print "\t\t\tInstruction came after mispredicted branch", ins
+            if(each.ins.type in ['L', 'A', 'M', 'I']):
+            	print "\t\t\tInstruction came after mispredicted branch", ins
             return 1
     return 0
 
 
-def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, map):
+def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, m):
     #Flush active list and queues, free physical registers
     old = []
     for each in active.active_list:
@@ -27,22 +28,14 @@ def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, map):
     for each in to_flush:
         ins = each.ins
         if(ins.type in ['L','S']):
-            if not(aq.Delete(ins)):
-                not_flushed.append(ins)
-            else:
-                if(ins.type=='L'):
-                    free.free_phys(ins.rd)
+            if(aq.Delete(ins) and ins.type=='L'):
+                free.free_phys(ins.rd)
         elif(ins.type in ['A','M']):
-            if not(fq.Delete(ins)):
-                not_flushed.append(ins)
-            else:
+            if(fq.Delete(ins)):
                 free.free_phys(ins.rd)
         elif(ins.type in ['I','B']):
-            if not(iq.Delete(ins)):
-                not_flushed.append(ins)
-            else:
-                if(ins.type=='I'):
-                    free.free_phys(ins.rd)
+            if (iq.Delete(ins) and ins.type=='I'):
+                free.free_phys(ins.rd)
     #Empty decode buffer
     dunit.renamed = []
     dunit.old_physical = []
@@ -67,12 +60,12 @@ def mispredict(mins, active, iq, fq, aq, free, dunit, funit, bs, map):
     before_mins = []
     print "\t\t\tBranch stack is:", bs.bstack
     for each in bs.bstack:
-        print each
-        if(each.ins is mins):
-            break
-        else:
+        if(each.ins is not mins):
             before_mins.append(each)
-    map = each.old_map
+        else:
+            break
+    print "\t\t\tBefore mins is:", before_mins       
+    m.map = each.old_map.map
     bs.bstack = bs.bstack[0:len(before_mins)]
 
 

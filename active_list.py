@@ -60,7 +60,8 @@ class ActiveList:
                     committed.append(elem.ins)
                 else:
                     committed.append(elem.ins)
-                    self.free.free_phys(elem.oldphys)
+                    if(elem.ins.type is not 'S'):
+                        self.free.free_phys(elem.oldphys)
                 print "\t\t\tCommitting instruction ", elem.ins
         num_committed = len(committed)
         self.active_list = self.active_list[num_committed:]

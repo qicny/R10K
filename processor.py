@@ -22,21 +22,21 @@ class Processor:
         self.bbit = BusyTable()
         self.aqueue = AddressQueue(self.bbit)
         self.fqueue = FPQueue(self.bbit)
-        self.lsqueue = LSQueue(self.bbit)
         self.iqueue = IntegerQueue(self.bbit)
         self.map = Map()
         self.BS = BranchStack(self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit)
         self.active = ActiveList(self.flist, self.BS)
+        self.lsqueue = LSQueue(self.bbit, self.active)
 
         self.funit = Fetch(name)
-        self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active, self.BS)
+        self.dunit = Decode(self.map, self.flist, self.aqueue, self.fqueue, self.iqueue, self.bbit, self.active, self.BS, self.funit)
         self.iunit = Issue(self.active, self.aqueue, self.fqueue, self.iqueue, self.lsqueue, self.bbit, self.BS)
         self.alu1 = ALU1(self.bbit, self.active, self.BS)
         self.alu2 = ALU2(self.bbit, self.active)
         self.fpa = FPA(self.bbit, self.active)
         self.fpm = FPM(self.bbit, self.active)
         self.ls = LS(self.bbit, self.active, self.lsqueue)
-        self.f = open(name + "_result2",'w')
+        self.f = open(name + "_result",'w')
 
     def printFreeList(self, cycle):
         print("Cycle " + str(cycle) + ": free list at the end of cycle")
@@ -158,17 +158,17 @@ class Processor:
                 if(inmask(to_execute['a'], mispredicted_branch)): to_execute['a']=None
                 if(inmask(to_execute['m'], mispredicted_branch)): to_execute['m']=None
                 if(inmask(to_execute['ls'], mispredicted_branch)): to_execute['l']=None
+                to_decode = []
                 continue;
-            if(cycle==20):
-                break
             print(sep)
             if not (to_decode or to_issue or not self.active.isEmpty()):          
             #if not (to_decode or to_issue):
                 print "Done! Done! Done!\n"
                 break  
 
-        print matrix[1]
+        #print matrix[1]
         printPipelineDiagram(matrix, cycle, self.f)
+        print "Number of cycles is ", cycle
 
 
 
